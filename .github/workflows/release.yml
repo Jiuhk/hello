@@ -13,7 +13,7 @@
 # The workflow will not run if there is no tag pushed with a "v" prefix and no change pushed to your 
 # default branch.
 on: push
-#test
+
 jobs:
   might_release:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
           tag_name: ${{ steps.vars.outputs.tag_name }}
           delete_release: true
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the Release
         uses: softprops/action-gh-release@v1
@@ -50,4 +50,4 @@ jobs:
           files: release/*
           prerelease: true 
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
